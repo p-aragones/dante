@@ -21,6 +21,7 @@ SRC	=	src/my_getnbr.c					\
 		src/split_func.c 				\
 		src/my_split.c 					\
 		src/print_array.c				\
+		src/free_array.c 				\
 
 CFLAGS	+=	-I./include/ -pedantic
 

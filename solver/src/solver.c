@@ -15,8 +15,10 @@ int solver(char *path)
     if (map_string == NULL)
         return (84);
     map = my_split(map_string, "\n");
+    free (map_string);
     if (map == NULL)
         return (84);
     print_array(map);
+    free_array(map);
     return (0);
 }

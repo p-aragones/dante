@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2021
 ** B-CPE-200-BAR-2-1-dante-pol.aragones
 ** File description:
-** print_array
+** free_array
 */
 
 #include "utils.h"
 
-void print_array(char **array)
+void free_array(char **array)
 {
     int i = 0;
 
     while (array[i]) {
-        my_putstr(array[i]);
-        my_putchar('\n');
+        free (array[i]);
         i++;
     }
+    free (array);
 }

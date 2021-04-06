@@ -39,5 +39,6 @@ int word_length(char *, int, char *);
 
 char **my_split(char *, char *);
 void print_array(char **);
+void free_array(char **);
 
 #endif
