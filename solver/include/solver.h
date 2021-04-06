@@ -11,6 +11,7 @@
 #include "utils.h"
 
 char *read_file(char *);
+int map_handling(char **);
 
 int solver(char *);
 

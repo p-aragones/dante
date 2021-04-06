@@ -18,6 +18,8 @@ int solver(char *path)
     free (map_string);
     if (map == NULL)
         return (84);
+    if (map_handling(map) != 0)
+        return (84);
     print_array(map);
     free_array(map);
     return (0);
