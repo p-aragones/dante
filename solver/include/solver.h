@@ -10,4 +10,8 @@
 
 #include "utils.h"
 
+char *read_file(char *);
+
+int solver(char *);
+
 #endif /* !SOLVER_H_ */

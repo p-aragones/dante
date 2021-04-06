@@ -7,8 +7,9 @@
 
 #include "solver.h"
 
-int main(void)
+int main(int ac, char **av)
 {
-    my_putstr("hello world\n");
-    return (0);
+    if (ac != 2)
+        return (84);
+    return (solver(av[1]));
 }

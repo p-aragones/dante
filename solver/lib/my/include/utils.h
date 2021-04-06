@@ -38,4 +38,6 @@ int w_count(char *, char *);
 int word_length(char *, int, char *);
 
 char **my_split(char *, char *);
+void print_array(char **);
+
 #endif
