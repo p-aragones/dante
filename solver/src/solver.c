@@ -11,6 +11,7 @@ int solver(char *path)
 {
     char *map_string = read_file(path);
     char **map = NULL;
+    cell_t ***grid = NULL;
 
     if (map_string == NULL)
         return (84);
@@ -20,7 +21,10 @@ int solver(char *path)
         return (84);
     if (map_handling(map) != 0)
         return (84);
-    map = a_star(map);
+    grid = cell_map(map);
+    if (grid == NULL)
+        return (84);
+    map = a_star(map, grid);
     print_array(map);
     free_array(map);
     return (0);

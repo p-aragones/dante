@@ -18,6 +18,13 @@ typedef struct list_s {
     struct list_s next;
 } list_t;
 
+typedef struct cell_s {
+    char c;
+    int walkable;
+    int f;
+    point_t *pos;
+} cell_t;
+
 typedef struct point_s {
     int x;
     int y;
@@ -25,9 +32,11 @@ typedef struct point_s {
 
 char *read_file(char *);
 int map_handling(char **);
+cell_t ***cell_map(char **);
 
 int calculate_f(int, int, int, int);
 void get_better_f(list_t *, list_t *, int *, list_t *);
+char **a_star(char **, cell_t ***);
 int solver(char *);
 
 point_t *create_point(int, int);

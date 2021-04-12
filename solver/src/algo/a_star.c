@@ -39,7 +39,7 @@ void end_found(void)
 {
 }
 
-char **a_star(char **map)
+char **a_star(char **map, cell_t ***grid)
 {
     list_t *open_list = NULL;
     list_t *closed_list = NULL;
