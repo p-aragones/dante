@@ -10,9 +10,17 @@
 
 #include "utils.h"
 
+typedef struct list_s {
+    char c;
+    int walkable;
+    struct list_s next;
+} list_t;
+
 char *read_file(char *);
 int map_handling(char **);
 
 int solver(char *);
+
+int list_len(list_t *);
 
 #endif /* !SOLVER_H_ */

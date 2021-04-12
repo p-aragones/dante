@@ -7,21 +7,9 @@
 
 NAME	=	libmy.a
 
-SRC	=	src/my_getnbr.c					\
-		src/my_putchar.c				\
-		src/my_put_nbr.c				\
-		src/my_putstr.c					\
-		src/my_strcat.c					\
-		src/my_strcmp.c					\
-		src/my_str_isalpha.c			\
-		src/my_str_isnum.c				\
-		src/my_strlen.c					\
-		src/my_strdup.c					\
-		src/my_malloc.c					\
-		src/split_func.c 				\
-		src/my_split.c 					\
-		src/print_array.c				\
-		src/free_array.c 				\
+RWILDCARD = $(foreach d,$(wildcard $1*),$(call RWILDCARD,$d/,$2) $(filter $(subst *,%,$2),$d))
+
+SRC += $(call RWILDCARD,$(PATH_SRC),*.c)
 
 CFLAGS	+=	-I./include/ -pedantic
 

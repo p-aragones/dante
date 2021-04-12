@@ -20,6 +20,7 @@ int solver(char *path)
         return (84);
     if (map_handling(map) != 0)
         return (84);
+    map = a_star(map);
     print_array(map);
     free_array(map);
     return (0);
