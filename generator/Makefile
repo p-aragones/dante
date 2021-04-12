@@ -5,34 +5,24 @@
 ## (name of the project)'s Makefile
 ##
 
-CC	=	gcc
-LD	=	$(CC)
-RM	=	rm -f
-
-INC_PATH	=	include/
-
 NAME	=	generator
 
 SRC	=	src/main.c	\
+		src/check_args.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	+=	-I $(INC_PATH)
-CFLAGS	+=	-pedantic
-CFLAGS	+=	-g3
-CFLAGS	+=	-W -Wall -Wextra
-CFLAGS	+=	-Wno-long-long
-CFLAGS	+=	-Werror
+CFLAGS	=	-I./include/
 
-all:	$(NAME)
+all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(LD) -o $(NAME) $(OBJ)
+		$(CC) $(OBJ) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+		rm -f $(OBJ)
 
-fclean:	clean
-	$(RM) $(NAME)
+fclean: 	clean
+		rm -f $(NAME)
 
-re:	fclean all
+re:		fclean all

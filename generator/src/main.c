@@ -5,12 +5,11 @@
 ** main function
 */
 
-#include "../include/cesar.h"
+#include "generator.h"
 
 int main(int argc, char **argv)
 {
     if (check_args(argc, argv) == 84)
         return (84);
-    return (switch_flag(argv));
-    
+    return (0);
 }
