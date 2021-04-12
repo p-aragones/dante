@@ -14,5 +14,6 @@
 #include <string.h>
 
 int check_args(int argc, char **argv);
+int generator(int x, int y);
 
 #endif
