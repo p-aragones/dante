@@ -11,16 +11,9 @@ RM	=	rm -f
 
 INC_PATH	=	include/
 
-NAME	=	cesar
+NAME	=	generator
 
-SRC	=	src/main.c		\
-		src/read/get_content.c	\
-		src/read/get_stat.c	\
-		src/cesar.c		\
-		src/handling/check_int.c\
-		src/flag/switch_flag.c	\
-		src/flag/check_flag.c 	\
-		src/handling/check_args.c
+SRC	=	src/main.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
