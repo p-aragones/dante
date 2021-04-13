@@ -39,24 +39,19 @@ void end_found(void)
 {
 }
 
-char **a_star(char **map, cell_t ***grid)
+char **a_star(char **map, cell_t ***grid, point_t *end)
 {
     list_t *open_list = NULL;
     list_t *closed_list = NULL;
     list_t *node = NULL;
-    point_t *end = find_end;
-    int index = 0;
 
-    if (end == NULL)
-        return (NULL);
     add_start(open_list, grid[0][0]);
     while (list_len(open_list) > 0) {
-        node = open_list;
-        index = 0;
-        get_better_f(node, open_list, &index, closed_list);
+        node = open_list->cell;
+        get_better_f(node, open_list, closed_list);
         add_end(node, node->cell);
         if (end->x == node->cell->pos->x && end->y == node->cell->pos->y)
             end_found();
-        get_children(open_list, closed_list, grid);
+        get_children(open_list, closed_list, node, grid);
     }
 }

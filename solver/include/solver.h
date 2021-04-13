@@ -10,6 +10,12 @@
 
 #include "utils.h"
 
+// [x, y]
+#define UP 0, 1
+#define DOWN 0, -1
+#define LEFT -1, 0
+#define RIGHT 1, 0
+
 typedef struct list_s {
     cell_t *cell;
     struct list_s next;
@@ -20,6 +26,7 @@ typedef struct cell_s {
     int walkable;
     int f;
     point_t *pos;
+    point_t *end;
 } cell_t;
 
 typedef struct point_s {
@@ -29,11 +36,12 @@ typedef struct point_s {
 
 char *read_file(char *);
 int map_handling(char **);
-cell_t ***cell_map(char **);
+cell_t ***cell_map(char **, point_t *);
+point_t *find_end(char **);
 
 int calculate_f(int, int, int, int);
-void get_better_f(list_t *, list_t *, int *, list_t *);
-char **a_star(char **, cell_t ***);
+void get_better_f(list_t *, list_t *, list_t *);
+char **a_star(char **, cell_t ***, point_t *);
 int solver(char *);
 
 point_t *create_point(int, int);

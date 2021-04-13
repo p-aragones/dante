@@ -17,16 +17,26 @@ int len_y(char **map)
     return (i);
 }
 
-cell_t *create_cell(char c, int y, int x)
+cell_t *create_cell(char **map, int y, int x, point_t *end)
 {
     cell_t *cell = malloc(sizeof(cell_t));
+    point_t *end = find_end(map);
 
     if (cell == NULL)
         return (NULL);
+    cell->c = map[y][x];
+    cell->f = calculate_f(x, y, end->x, end->y);
+    cell->pos->x = x;
+    cell->pos->y = y;
+    cell->end = end;
+    if (map[y][x] == 'X')
+        cell->walkable = 0;
+    else
+        cell->walkable = 1;
     return (cell);
 }
 
-cell_t ***cell_map(char **map)
+cell_t ***cell_map(char **map, point_t *end)
 {
     cell_t ***cells = malloc(sizeof(cell_t) * (len_y(map) + 1));
     int i = 0;
@@ -39,10 +49,10 @@ cell_t ***cell_map(char **map)
         if (cells[i] == NULL)
             return (NULL);
         while (map[i][j]) {
-            cells[i][j] = create_cell(map[i][j], i, j);
+            cells[i][j] = create_cell(map, i, j, end);
             j++;
         }
-        cells[i][j] = create_cell('\0', i, j);
+        cells[i][j] = create_cell('\0', i, j, end);
         j = 0;
         i++;
     }
