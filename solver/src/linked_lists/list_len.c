@@ -10,7 +10,7 @@
 int list_len(list_t *list)
 {
     list_t *temp = list;
-    int i = 0;
+    int i = 1;
 
     while (temp) {
         temp = temp->next;

@@ -7,13 +7,13 @@
 
 #include "solver.h"
 
-list_t *delete_node(list_t *list, int *index)
+list_t *delete_node(list_t *list, int index)
 {
     list_t *temp = list;
     int i = 0;
 
     while (temp->next != NULL) {
-        if (i + 1 == *index) {
+        if (i + 1 == index) {
             temp->next = temp->next->next;
             return (list);
         }
@@ -40,11 +40,12 @@ list_t *add_start(list_t *head, cell_t *cell)
 
     if (list == NULL)
         return (NULL);
+    list->cell->parent = NULL;
     list->next = head;
     return (list);
 }
 
-list_t *add_end(list_t *head, cell_t *cell)
+list_t *add_end(list_t *head, cell_t *cell, cell_t *parent)
 {
     list_t *list = create_node(cell);
     list_t *temp = head;
@@ -53,6 +54,7 @@ list_t *add_end(list_t *head, cell_t *cell)
         return (NULL);
     if (head == NULL)
         return (list);
+    list->cell->parent = parent;
     while (temp->next != NULL)
         temp = temp->next;
     temp->next = list;

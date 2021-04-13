@@ -20,12 +20,13 @@ int len_y(char **map)
 cell_t *create_cell(char **map, int y, int x, point_t *end)
 {
     cell_t *cell = malloc(sizeof(cell_t));
-    point_t *end = find_end(map);
 
     if (cell == NULL)
         return (NULL);
     cell->c = map[y][x];
     cell->f = calculate_f(x, y, end->x, end->y);
+    cell->g = calculate_g(x, y);
+    cell->pos = create_point(0, 0);
     cell->pos->x = x;
     cell->pos->y = y;
     cell->end = end;
@@ -52,7 +53,6 @@ cell_t ***cell_map(char **map, point_t *end)
             cells[i][j] = create_cell(map, i, j, end);
             j++;
         }
-        cells[i][j] = create_cell('\0', i, j, end);
         j = 0;
         i++;
     }

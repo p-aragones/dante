@@ -39,16 +39,16 @@ list_t *get_neighbours(cell_t *node, cell_t ***grid, list_t *closed_list)
 
     new_child = append_children(UP, node, grid);
     if (new_child != NULL && not_closed(new_child, closed_list) == 1)
-        add_end(children, new_child);
+        add_end(children, new_child, children->cell->parent);
     new_child = append_children(DOWN, node, grid);
     if (new_child != NULL && not_closed(new_child, closed_list) == 1)
-        add_end(children, new_child);
+        add_end(children, new_child, children->cell->parent);
     new_child = append_children(LEFT, node, grid);
     if (new_child != NULL && not_closed(new_child, closed_list) == 1)
-        add_end(children, new_child);
+        add_end(children, new_child, children->cell->parent);
     new_child = append_children(RIGHT, node, grid);
     if (new_child != NULL && not_closed(new_child, closed_list) == 1)
-        add_end(children, new_child);
+        add_end(children, new_child, children->cell->parent);
     return (children);
 }
 
@@ -56,4 +56,16 @@ void get_children(list_t *open_list, list_t *closed_list,
 cell_t *current_node, cell_t ***grid)
 {
     list_t *children = get_neighbours(current_node, grid, closed_list);
+    list_t *child = children;
+    list_t *l = open_list;
+
+    while (child) {
+        while (child && not_closed(child->cell, closed_list) == 0)
+            child = child->next;
+        while (l) {
+            while (child->cell == l->cell && child->cell->g > l->cell->g)
+                l = l->next;
+        }
+        add_end(open_list, child->cell, child->cell->parent);
+    }
 }
