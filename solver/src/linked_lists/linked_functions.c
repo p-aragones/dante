@@ -23,24 +23,20 @@ list_t *delete_node(list_t *list, int *index)
     return (list);
 }
 
-list_t *create_node(char c, point_t *end, point_t *pos)
+list_t *create_node(cell_t *cell)
 {
     list_t *node = malloc(sizeof(list_t));
 
     if (node == NULL)
         return (NULL);
-    if (c != 'X')
-        node->walkable = 1;
-    node->c = c;
-    node->f = calculate_f(pos->x, pos->y, end->x, end->y);
-    node->pos = create_point(pos->x, pos->y);
+    node->cell = cell;
     node->next = NULL;
     return (node);
 }
 
-list_t *add_start(list_t *head, char c, point_t *end, point_t *pos)
+list_t *add_start(list_t *head, cell_t *cell)
 {
-    list_t *list = create_node(c, end, pos);
+    list_t *list = create_node(cell);
 
     if (list == NULL)
         return (NULL);
@@ -48,9 +44,9 @@ list_t *add_start(list_t *head, char c, point_t *end, point_t *pos)
     return (list);
 }
 
-list_t *add_end(list_t *head, char c, point_t *end, point_t *pos)
+list_t *add_end(list_t *head, cell_t *cell)
 {
-    list_t *list = create_node(c, end, pos);
+    list_t *list = create_node(cell);
     list_t *temp = head;
 
     if (list == NULL)
@@ -63,11 +59,11 @@ list_t *add_end(list_t *head, char c, point_t *end, point_t *pos)
     return (head);
 }
 
-list_t *add_node(list_t *head, char c, point_t *end, point_t *pos)
+list_t *add_node(list_t *head, cell_t *cell)
 {
     list_t *temp = head;
 
-    head = create_node(c, end, pos);
+    head = create_node(cell);
     if (head == NULL)
         return (NULL);
     if (head == NULL)

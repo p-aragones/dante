@@ -43,21 +43,20 @@ char **a_star(char **map, cell_t ***grid)
 {
     list_t *open_list = NULL;
     list_t *closed_list = NULL;
-    list_t *current_node = NULL;
+    list_t *node = NULL;
     point_t *end = find_end;
-    point_t *pos = create_point(0, 0);
     int index = 0;
 
-    if (end == NULL, pos == NULL)
+    if (end == NULL)
         return (NULL);
-    add_start(open_list, map[0][0], end, pos);
+    add_start(open_list, grid[0][0]);
     while (list_len(open_list) > 0) {
-        current_node = open_list;
+        node = open_list;
         index = 0;
-        get_better_f(current_node, open_list, &index, closed_list);
-        add_end(current_node, map[pos->y][pos->x], end, pos);
-        if (end->x == pos->x && end->y == pos->y)
+        get_better_f(node, open_list, &index, closed_list);
+        add_end(node, node->cell);
+        if (end->x == node->cell->pos->x && end->y == node->cell->pos->y)
             end_found();
-        get_children(open_list, closed_list, map);
+        get_children(open_list, closed_list, grid);
     }
 }

@@ -11,10 +11,7 @@
 #include "utils.h"
 
 typedef struct list_s {
-    char c;
-    int walkable;
-    int f;
-    point_t *pos;
+    cell_t *cell;
     struct list_s next;
 } list_t;
 
@@ -40,10 +37,10 @@ char **a_star(char **, cell_t ***);
 int solver(char *);
 
 point_t *create_point(int, int);
-list_t *create_node(char, point_t *, point_t *);
-list_t *add_start(list_t *, char, point_t *, point_t *);
-list_t *add_end(list_t *, char, point_t *, point_t *);
-list_t *add_node(list_t *, char, point_t *, point_t *);
+list_t *create_node(cell_t *);
+list_t *add_start(list_t *, cell_t *);
+list_t *add_end(list_t *, cell_t *);
+list_t *add_node(list_t *, cell_t *);
 list_t *delete_node(list_t *, int *);
 int list_len(list_t *);
 
