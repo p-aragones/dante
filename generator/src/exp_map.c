@@ -33,6 +33,12 @@ char *arr_to_str(char **maze, int x, int y)
 int exp_map(char **maze, int x, int y)
 {
     char *map = arr_to_str(maze, x, y);
-    printf("%s\n", map);
+    int fd = open("maze", O_CREAT | O_WRONLY, 00444);
+    size_t bit = 0;
+
+    if (fd == -1)
+        return (84);
+    bit = strlen(map);
+    write(fd, map, bit);
     return (0);
 }
