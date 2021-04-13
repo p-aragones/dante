@@ -10,6 +10,7 @@ NAME	=	generator
 SRC	=	src/main.c	\
 		src/check_args.c	\
 		src/generator.c		\
+		src/exp_map.c		\
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -15,5 +15,6 @@
 
 int check_args(int argc, char **argv);
 int generator(int x, int y);
+int exp_map(char **maze, int x, int y);
 
 #endif

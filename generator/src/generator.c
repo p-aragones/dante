@@ -9,5 +9,19 @@
 
 int generator(int x, int y)
 {
-    return (0);
+    char **maze = malloc(sizeof(char *) * y);
+    int i = 0;
+    int c = 0;
+
+    while (i < y) {
+        maze[i] = malloc(sizeof(char) * x);
+        c = 0;
+        while (c < x) {
+            maze[i][c] = '*';
+            c++;
+        }
+        i++;
+    }
+    i = exp_map(maze, x, y);
+    return (i);
 }
