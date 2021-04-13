@@ -51,10 +51,12 @@ char **a_star(char **map, cell_t ***grid, point_t *end)
     list_t *closed_list = NULL;
     list_t *node = NULL;
 
+    my_putchar(grid[0][0]->c);
     add_start(open_list, grid[0][0]);
+    my_putchar(open_list->cell->c);
     while (list_len(open_list) > 0) {
-        node->cell = open_list->cell;
-        get_better_f(node, open_list, closed_list);
+        add_start(node, open_list->cell);
+        get_better_f(node, open_list);
         add_end(node, node->cell, node->cell->parent);
         if (end->x == node->cell->pos->x && end->y == node->cell->pos->y)
             map = end_found(map, node->cell, grid);

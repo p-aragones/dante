@@ -7,7 +7,7 @@
 
 #include "solver.h"
 
-void get_better_f(list_t *current_node, list_t *open_list, list_t *closed_list)
+void get_better_f(list_t *current_node, list_t *open_list)
 {
     list_t *temp = open_list;
     int i = 0;
