@@ -7,30 +7,84 @@
 
 #include "generator.h"
 
-char create_cell(char **maze, int y, int i, int c)
+int get_move(char **maze, int *c, int x, int y)
 {
-    int b = rand() % 3;
+    int r = rand() % 4;
+    int i = 0;
 
-    if (b == 2)
-        maze[i][c] = 'X';
-    else
-        maze[i][c] = '*';
-    return (maze[i][c]);
+    while (i < 4) {
+        if (r == 0) {
+            if (c[1] < x - 2 && maze[c[0]][c[1] + 2] != '*')
+                return (r);
+        }
+        if (r == 1) {
+            if (c[0] < y - 2 && maze[c[0] + 2][c[1]] != '*')
+                return (r);
+        }
+        if (r == 2) {
+            if (c[1] > 1 && maze[c[0]][c[1] - 2] != '*')
+                return (r);
+        }
+        if (r == 3) {
+            if (c[0] > 1 && maze[c[0] - 2][c[1]] != '*')
+                return (r);
+        }
+        r++;
+        if (r == 4)
+            r = 0;
+        i++;
+    }
+    return (-1);
 }
 
 char **create_maze(char **maze, int x, int y)
 {
-    int i = 0;
-    int c = 0;
+    int *c = malloc(sizeof(int) * 2);
+    int m = 5;
 
-    while (i < y) {
-        c = 0;
-        while (c < x) {
-            maze[i][c] = create_cell(maze, y, i, c);
-            c++;
+    c[0] = 0;
+    c[1] = 0;
+    while (m != -1) {
+        m = get_move(maze, c, x, y);
+        if (m == 0) {
+            maze[c[0]][c[1]] = '*';
+            maze[c[0]][c[1] + 1] = '*';
+            c[1] = c[1] + 2;
         }
-        i++;
+        if (m == 1) {
+            maze[c[0]][c[1]] = '*';
+            maze[c[0] + 1][c[1]] = '*';
+            c[0] = c[0] + 2;
+        }
+        if (m == 2) {
+            maze[c[0]][c[1]] = '*';
+            maze[c[0]][c[1] - 1] = '*';
+            c[1] = c[1] - 2;
+        }
+        if (m == 3) {
+            maze[c[0]][c[1]] = '*';
+            maze[c[0] - 1][c[1]] = '*';
+            c[0] = c[0] - 2;
+        }
     }
+    while (c[1] < x) {
+        maze[c[0]][c[1]] = '*';
+        c[1]++;
+    }
+    while (c[0] < y) {
+        maze[c[0]][c[1] - 1] = '*';
+        c[0]++;
+    }
+    return (maze);
+}
+
+char square(char maze, int i, int c)
+{
+    maze = 'e';
+    if (i % 2 != 0)
+        maze = 'X';
+    else if (c % 2 != 0)
+        maze = 'X';
     return (maze);
 }
 
@@ -44,11 +98,13 @@ int generator(int x, int y)
         maze[i] = malloc(sizeof(char) * x);
         c = 0;
         while (c < x) {
-            maze[i][c] = 'e';
+            maze[i][c] = square(maze[i][c], i, c);
             c++;
         }
         i++;
     }
+    maze[i - 1][c - 1] = 'e';
+    maze[i - 1][c - 2] = 'e';
     maze = create_maze(maze, x, y);
     i = exp_map(maze, x, y);
     return (i);

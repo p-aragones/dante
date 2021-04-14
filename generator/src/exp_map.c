@@ -9,7 +9,7 @@
 
 char *arr_to_str(char **maze, int x, int y)
 {
-    char *map = malloc(sizeof(char) * ((x + 1) * y));
+    char *map = malloc(sizeof(char) * (((x + 1) * y) + 1));
     int i = 0;
     int e = 0;
     int c = 0;
@@ -33,7 +33,13 @@ char *arr_to_str(char **maze, int x, int y)
 int exp_map(char **maze, int x, int y)
 {
     char *map = arr_to_str(maze, x, y);
+    int i = 0;
 
+    while (map[i] != '\0') {
+        if (map[i] == 'e')
+            map[i] = '*';
+        i++;
+    }
     printf("%s", map);
     return (0);
 }
