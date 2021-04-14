@@ -54,7 +54,7 @@ list_t *get_neighbours(cell_t *node, cell_t ***grid, list_t *closed_list)
     return (children);
 }
 
-void get_children(list_t *open_list, list_t *closed_list,
+list_t *get_children(list_t *open_list, list_t *closed_list,
 cell_t *current_node, cell_t ***grid)
 {
     list_t *children = get_neighbours(current_node, grid, closed_list);
@@ -63,18 +63,14 @@ cell_t *current_node, cell_t ***grid)
     list_t *c = closed_list;
     int status = 0;
 
+    child = skip_child(o, c, child, &status);
     while (child) {
-        child = skip_child(o, c, child, &status);
         while (status != 0) {
             child = skip_child(o, c, child, &status);
         }
-        while (child && in_list(child->cell, closed_list) == 1) {
-            child = child->next;
-        }
-        while (o && in_list(child->cell, o) == 1 &&
-        child->cell->g > o->cell->g) {
-            o = o->next;
-        }
-        open_list = add_end(open_list, child->cell, child->cell->parent);
+        printf("current node, x: %d y: %d\n", current_node->pos->x, current_node->pos->y);
+        printf("child cell: x: %d y: %d\n", child->cell->pos->x, child->cell->pos->y);
+        open_list = add_end(open_list, child->cell, current_node);
+        return (open_list);
     }
 }

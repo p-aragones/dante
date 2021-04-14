@@ -10,13 +10,13 @@
 list_t *skip_child(list_t *open_list, list_t *closed_list, list_t *children,
 int *status)
 {
-    if (in_list(children->cell, closed_list) == 1) {
+    if (children && in_list(children->cell, closed_list) == 1) {
         children = children->next;
         *status = -1;
         return (children);
     }
-    if (in_list(children->cell, open_list) == 1) {
-        if (children->cell->g > open_list->cell->g) {
+    if (children && in_list(children->cell, open_list) == 1) {
+        if (children->cell->f > open_list->cell->f) {
             children = children->next;
             *status = -1;
             return (children);
