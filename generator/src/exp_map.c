@@ -34,6 +34,6 @@ int exp_map(char **maze, int x, int y)
 {
     char *map = arr_to_str(maze, x, y);
 
-    printf("%s\n", map);
+    printf("%s", map);
     return (0);
 }
