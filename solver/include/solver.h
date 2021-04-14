@@ -45,6 +45,8 @@ int calculate_f(int, int, int, int);
 int calculate_g(int, int);
 void get_better_f(list_t *, list_t *);
 void get_children(list_t *, list_t *, cell_t *, cell_t ***);
+int in_list(cell_t *, list_t *);
+list_t *skip_child(list_t *, list_t *, list_t *, int *);
 char **a_star(char **, cell_t ***, point_t *);
 int solver(char *);
 

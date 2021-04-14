@@ -29,16 +29,7 @@ list_t *create_node(cell_t *cell)
 
     if (node == NULL)
         return (NULL);
-    node->cell = malloc(sizeof(cell_t));
-    node->cell->pos = create_point(0, 0);
-    node->cell->c = cell->c;
-    node->cell->end = cell->end;
-    node->cell->g = cell->g;
-    node->cell->pos->x = cell->pos->x;
-    node->cell->pos->y = cell->pos->y;
-    node->cell->walkable = cell->walkable;
-    node->cell->f = cell->f;
-    node->cell->parent = cell->parent;
+    node->cell = cell;
     node->next = NULL;
     return (node);
 }
@@ -63,9 +54,9 @@ list_t *add_end(list_t *head, cell_t *cell, cell_t *parent)
         return (NULL);
     if (head == NULL)
         return (list);
-    list->cell->parent = parent;
     while (temp->next != NULL)
         temp = temp->next;
+    list->cell->parent = parent;
     temp->next = list;
     return (head);
 }

@@ -39,14 +39,14 @@ cell_t *create_cell(char **map, int y, int x, point_t *end)
 
 cell_t ***cell_map(char **map, point_t *end)
 {
-    cell_t ***cells = malloc(sizeof(cell_t) * (len_y(map) + 1));
+    cell_t ***cells = malloc(sizeof(cell_t **) * (len_y(map) + 1));
     int i = 0;
     int j = 0;
 
     if (cells == NULL)
         return (NULL);
     while (map[i]) {
-        cells[i] = malloc(sizeof(cell_t) * (my_strlen(map[i]) + 1));
+        cells[i] = malloc(sizeof(cell_t *) * (my_strlen(map[i]) + 1));
         if (cells[i] == NULL)
             return (NULL);
         while (map[i][j]) {
