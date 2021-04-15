@@ -27,8 +27,10 @@ int in_list(cell_t *child, list_t *list)
     list_t *temp = list;
 
     while (temp) {
-        if (temp->cell->pos == child->pos)
+        if (temp->cell->pos->x == child->pos->x &&
+        temp->cell->pos->y == child->pos->y) {
             return (1);
+        }
         temp = temp->next;
     }
     return (0);
@@ -41,16 +43,16 @@ list_t *get_neighbours(cell_t *node, cell_t ***grid, list_t *closed_list)
 
     new_child = append_children(UP, node, grid);
     if (new_child != NULL && in_list(new_child, closed_list) == 0)
-        children = add_end(children, new_child, NULL);
+        children = add_start(children, new_child);
     new_child = append_children(DOWN, node, grid);
     if (new_child != NULL && in_list(new_child, closed_list) == 0)
-        children = add_end(children, new_child, NULL);
+        children = add_start(children, new_child);
     new_child = append_children(LEFT, node, grid);
     if (new_child != NULL && in_list(new_child, closed_list) == 0)
-        children = add_end(children, new_child, NULL);
+        children = add_start(children, new_child);
     new_child = append_children(RIGHT, node, grid);
     if (new_child != NULL && in_list(new_child, closed_list) == 0)
-        children = add_end(children, new_child, NULL);
+        children = add_start(children, new_child);
     return (children);
 }
 
@@ -68,9 +70,8 @@ cell_t *current_node, cell_t ***grid)
         while (status != 0) {
             child = skip_child(o, c, child, &status);
         }
-        printf("current node, x: %d y: %d\n", current_node->pos->x, current_node->pos->y);
-        printf("child cell: x: %d y: %d\n", child->cell->pos->x, child->cell->pos->y);
-        open_list = add_end(open_list, child->cell, current_node);
-        return (open_list);
+        open_list = add_start(open_list, child->cell);
+        child = child->next;
     }
+    return (open_list);
 }

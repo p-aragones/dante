@@ -15,6 +15,11 @@ int *status)
         *status = -1;
         return (children);
     }
+    if (children->cell->walkable == 0) {
+        children = children->next;
+        *status = -1;
+        return (children);
+    }
     if (children && in_list(children->cell, open_list) == 1) {
         if (children->cell->f > open_list->cell->f) {
             children = children->next;

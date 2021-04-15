@@ -46,7 +46,7 @@ list_t *add_start(list_t *head, cell_t *cell)
     return (list);
 }
 
-list_t *add_end(list_t *head, cell_t *cell, cell_t *parent)
+list_t *add_end(list_t *head, cell_t *cell)
 {
     list_t *list = create_node(cell);
     list_t *temp = head;
@@ -57,8 +57,6 @@ list_t *add_end(list_t *head, cell_t *cell, cell_t *parent)
         return (list);
     while (temp->next != NULL)
         temp = temp->next;
-    list->cell->parent = malloc(sizeof(cell_t));
-    list->cell->parent = parent;
     temp->next = list;
     return (head);
 }

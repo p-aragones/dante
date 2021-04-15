@@ -12,6 +12,8 @@ int list_len(list_t *list)
     list_t *temp = list;
     int i = 1;
 
+    if (list == NULL)
+        return (0);
     while (temp) {
         temp = temp->next;
         i++;

@@ -37,6 +37,7 @@ point_t *find_end(char **map)
 
 char **end_found(char **map, cell_t *node, cell_t ***grid)
 {
+    my_putstr("found\n");
     while (node->pos->x != 0 && node->pos->y != 0) {
         map[node->pos->y][node->pos->x] = 'o';
         node = grid[node->pos->y][node->pos->x];
@@ -49,16 +50,17 @@ char **a_star(char **map, cell_t ***grid, point_t *end)
 {
     list_t *open_list = NULL;
     list_t *closed_list = NULL;
-    list_t *node = NULL;
+    cell_t *node = NULL;
 
     open_list = add_start(open_list, grid[0][0]);
     while (list_len(open_list) > 0) {
-        node = add_start(node, open_list->cell);
-        open_list = get_better_f(node, open_list);
-        node = add_end(node, node->cell, node->cell->parent);
-        if (end->x == node->cell->pos->x && end->y == node->cell->pos->y)
-            map = end_found(map, node->cell, grid);
-        open_list = get_children(open_list, closed_list, node->cell, grid);
+        node = lower_f(open_list);
+        if (end->x == node->pos->x && end->y == node->pos->y)
+            map = end_found(map, node, grid);
+        open_list = get_children(open_list, closed_list, node, grid);
+        closed_list = add_start(closed_list, node);
+        open_list = delete_current_node(open_list, node);
+        print_list(open_list);
     }
     return (map);
 }

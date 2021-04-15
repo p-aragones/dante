@@ -47,13 +47,16 @@ list_t *get_better_f(list_t *, list_t *);
 list_t *get_children(list_t *, list_t *, cell_t *, cell_t ***);
 int in_list(cell_t *, list_t *);
 list_t *skip_child(list_t *, list_t *, list_t *, int *);
+cell_t *lower_f(list_t *);
+list_t *delete_current_node(list_t *, cell_t *);
+void print_list(list_t *);
 char **a_star(char **, cell_t ***, point_t *);
 int solver(char *);
 
 point_t *create_point(int, int);
 list_t *create_node(cell_t *);
 list_t *add_start(list_t *, cell_t *);
-list_t *add_end(list_t *, cell_t *, cell_t *);
+list_t *add_end(list_t *, cell_t *);
 list_t *add_node(list_t *, cell_t *);
 list_t *delete_node(list_t *, int);
 int list_len(list_t *);
