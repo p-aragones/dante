@@ -39,7 +39,6 @@ char **end_found(char **map, cell_t *node, cell_t ***grid)
 {
     my_putstr("found\n");
     while (node->pos->x != 0 && node->pos->y != 0) {
-        //printf("node: x: %d y: %d\n", node->pos->x, node->pos->y);
         map[node->pos->y][node->pos->x] = 'o';
         if (node->parent)
             node = node->parent;

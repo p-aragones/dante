@@ -31,7 +31,6 @@ cell_t *create_cell(char **map, int y, int x, point_t *end)
     cell->pos->y = y;
     cell->end = end;
     cell->parent = malloc(sizeof(cell_t));
-    cell->parent = NULL;
     if (map[y][x] == 'X')
         cell->walkable = 0;
     else
