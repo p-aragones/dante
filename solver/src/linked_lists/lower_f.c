@@ -16,7 +16,6 @@ cell_t *lower_f(list_t *open_list)
     while (list) {
         if (list->cell->f < lower->f)
             lower = list->cell;
-        //printf("lower: x:%d y:%d\n", list->cell->pos->x, list->cell->pos->y);
         list = list->next;
     }
     return (lower);
