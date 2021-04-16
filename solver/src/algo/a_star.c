@@ -51,16 +51,20 @@ char **a_star(char **map, cell_t ***grid, point_t *end)
     list_t *open_list = NULL;
     list_t *closed_list = NULL;
     cell_t *node = NULL;
+    int i = 0;
 
     open_list = add_start(open_list, grid[0][0]);
     while (list_len(open_list) > 0) {
         node = lower_f(open_list);
+        print_list(open_list);
         if (end->x == node->pos->x && end->y == node->pos->y)
             map = end_found(map, node, grid);
         open_list = get_children(open_list, closed_list, node, grid);
+        print_list(open_list);
         closed_list = add_start(closed_list, node);
         open_list = delete_current_node(open_list, node);
         print_list(open_list);
+        i++;
     }
     return (map);
 }
