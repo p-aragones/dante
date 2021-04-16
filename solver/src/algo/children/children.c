@@ -59,8 +59,7 @@ list_t *get_neighbours(cell_t *node, cell_t ***grid, list_t *closed_list)
 list_t *get_children(list_t *open_list, list_t *closed_list,
 cell_t *current_node, cell_t ***grid)
 {
-    list_t *children = get_neighbours(current_node, grid, closed_list);
-    list_t *child = children;
+    list_t *child = get_neighbours(current_node, grid, closed_list);
     list_t *o = open_list;
     list_t *c = closed_list;
     int status = 0;

@@ -30,7 +30,6 @@ list_t *create_node(cell_t *cell)
     if (node == NULL)
         return (NULL);
     node->cell = cell;
-    node->next = NULL;
     return (node);
 }
 
@@ -40,8 +39,6 @@ list_t *add_start(list_t *head, cell_t *cell)
 
     if (list == NULL)
         return (NULL);
-    list->cell->parent = malloc(sizeof(cell_t));
-    list->cell->parent = NULL;
     list->next = head;
     return (list);
 }

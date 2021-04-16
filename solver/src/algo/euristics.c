@@ -6,6 +6,7 @@
 */
 
 #include <math.h>
+#include <stdlib.h>
 
 int calculate_g(int x, int y)
 {
@@ -14,7 +15,7 @@ int calculate_g(int x, int y)
 
 int calculate_h(int x, int y, int x_end, int y_end)
 {
-    return (sqrt(pow(x - x_end, 2) + pow(y - y_end, 2)));
+    return (abs(x_end - x + y_end - y));
 }
 
 int calculate_f(int x, int y, int x_end, int y_end)

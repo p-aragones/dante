@@ -37,12 +37,13 @@ point_t *find_end(char **map)
 
 char **end_found(char **map, cell_t *node, cell_t ***grid)
 {
-    my_putstr("found\n");
-    while (node->pos->x != 0 && node->pos->y != 0) {
+    while (node->pos->x != 0 || node->pos->y != 0) {
         map[node->pos->y][node->pos->x] = 'o';
-        if (node->parent)
+        if (node->parent) {
             node = node->parent;
+        }
     }
+    map[0][0] = 'o';
     print_array(map);
     return (map);
 }
