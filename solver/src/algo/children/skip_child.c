@@ -10,12 +10,12 @@
 list_t *skip_child(list_t *open_list, list_t *closed_list, list_t *children,
 int *status)
 {
-    if (children && in_list(children->cell, closed_list) == 1) {
-        children = children->next;
+    if (!children) {
         *status = -1;
         return (children);
     }
-    if (children->cell->walkable == 0) {
+    if (children && in_list(children->cell, closed_list) == 1 ||
+    children->cell->walkable == 0) {
         children = children->next;
         *status = -1;
         return (children);
