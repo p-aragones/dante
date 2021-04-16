@@ -70,6 +70,7 @@ cell_t *current_node, cell_t ***grid)
         while (status != 0) {
             child = skip_child(o, c, child, &status);
         }
+        child->cell->parent = current_node;
         open_list = add_start(open_list, child->cell);
         child = child->next;
     }
