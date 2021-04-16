@@ -10,17 +10,55 @@
 
 #include "utils.h"
 
-typedef struct list_s {
+// [x, y]
+#define UP 0, 1
+#define DOWN 0, -1
+#define LEFT -1, 0
+#define RIGHT 1, 0
+
+typedef struct point_s {
+    int x;
+    int y;
+} point_t;
+
+typedef struct cell_s {
     char c;
     int walkable;
-    struct list_s next;
+    int f;
+    int g;
+    point_t *pos;
+    point_t *end;
+    struct cell_s *parent;
+} cell_t;
+
+typedef struct list_s {
+    cell_t *cell;
+    struct list_s *next;
 } list_t;
 
 char *read_file(char *);
 int map_handling(char **);
+cell_t ***cell_map(char **, point_t *);
+point_t *find_end(char **);
 
+int calculate_f(int, int, int, int);
+int calculate_g(int, int);
+list_t *get_better_f(list_t *, list_t *);
+list_t *get_children(list_t *, list_t *, cell_t *, cell_t ***);
+int in_list(cell_t *, list_t *);
+list_t *skip_child(list_t *, list_t *, list_t *, int *);
+cell_t *lower_f(list_t *);
+list_t *delete_current_node(list_t *, cell_t *);
+void print_list(list_t *);
+char **a_star(char **, cell_t ***, point_t *);
 int solver(char *);
 
+point_t *create_point(int, int);
+list_t *create_node(cell_t *);
+list_t *add_start(list_t *, cell_t *);
+list_t *add_end(list_t *, cell_t *);
+list_t *add_node(list_t *, cell_t *);
+list_t *delete_node(list_t *, int);
 int list_len(list_t *);
 
 #endif /* !SOLVER_H_ */
