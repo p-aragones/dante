@@ -13,7 +13,8 @@ void print_array(char **array)
 
     while (array[i]) {
         my_putstr(array[i]);
-        my_putchar('\n');
+        if (array[i + 1])
+            my_putchar('\n');
         i++;
     }
 }
