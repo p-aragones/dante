@@ -13,6 +13,8 @@ int check_null(char **argv)
         return (84);
     if (strlen(argv[2]) == 1 && argv[2][0] == '0')
         return (84);
+    if (atoi(argv[1]) == 1 || atoi(argv[2]) == 1)
+        return (84);
     return (0);
 }
 
