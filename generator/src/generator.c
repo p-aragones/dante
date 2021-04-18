@@ -12,29 +12,46 @@ int get_move(char **maze, int *c, int x, int y)
     int r = rand() % 4;
     int i = 0;
 
-    while (i < 4) {
-        if (r == 0) {
+    while (i++ < 4) {
+        if (r == 0 || r == 4)
             if (c[1] < x - 2 && maze[c[0]][c[1] + 2] == 'e')
                 return (r);
-        }
-        if (r == 1) {
+        if (r == 1 || r == 5)
             if (c[0] < y - 2 && maze[c[0] + 2][c[1]] == 'e')
                 return (r);
-        }
-        if (r == 2) {
+        if (r == 2 || r == 6)
             if (c[1] > 1 && maze[c[0]][c[1] - 2] == 'e')
                 return (r);
-        }
-        if (r == 3) {
+        if (r == 3)
             if (c[0] > 1 && maze[c[0] - 2][c[1]] == 'e')
                 return (r);
-        }
         r++;
-        if (r == 4)
-            r = 0;
-        i++;
     }
     return (-1);
+}
+
+void allocate(char **maze, int **c, int i, int m)
+{
+    if (m == 0) {
+        maze[c[i][0]][c[i][1] + 1] = '*';
+        c[i + 1][1] = c[i][1] + 2;
+        c[i + 1][0] = c[i][0];
+    }
+    if (m == 1) {
+        maze[c[i][0] + 1][c[i][1]] = '*';
+        c[i + 1][0] = c[i][0] + 2;
+        c[i + 1][1] = c[i][1];
+    }
+    if (m == 2) {
+        maze[c[i][0]][c[i][1] - 1] = '*';
+        c[i + 1][1] = c[i][1] - 2;
+        c[i + 1][0] = c[i][0];
+    }
+    if (m == 3) {
+        maze[c[i][0] - 1][c[i][1]] = '*';
+        c[i + 1][0] = c[i][0] - 2;
+        c[i + 1][1] = c[i][1];
+    }
 }
 
 char **create_maze(char **maze, int x, int y, int **c)
@@ -48,29 +65,9 @@ char **create_maze(char **maze, int x, int y, int **c)
     while (i != 0 || m != -1) {
         c[i + 1] = malloc(sizeof(int) * 2);
         m = get_move(maze, c[i], x, y);
-        if (m == 0) {
+        if (m >= 0 && m <= 3) {
             maze[c[i][0]][c[i][1]] = '*';
-            maze[c[i][0]][c[i][1] + 1] = '*';
-            c[i + 1][1] = c[i][1] + 2;
-            c[i + 1][0] = c[i][0];
-        }
-        if (m == 1) {
-            maze[c[i][0]][c[i][1]] = '*';
-            maze[c[i][0] + 1][c[i][1]] = '*';
-            c[i + 1][0] = c[i][0] + 2;
-            c[i + 1][1] = c[i][1];
-        }
-        if (m == 2) {
-            maze[c[i][0]][c[i][1]] = '*';
-            maze[c[i][0]][c[i][1] - 1] = '*';
-            c[i + 1][1] = c[i][1] - 2;
-            c[i + 1][0] = c[i][0];
-        }
-        if (m == 3) {
-            maze[c[i][0]][c[i][1]] = '*';
-            maze[c[i][0] - 1][c[i][1]] = '*';
-            c[i + 1][0] = c[i][0] - 2;
-            c[i + 1][1] = c[i][1];
+            allocate(maze, c, i, m);
         }
         if (m == -1) {
             maze[c[i][0]][c[i][1]] = '*';
