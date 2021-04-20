@@ -7,7 +7,7 @@
 
 #include "generator.h"
 
-char *arr_to_str(char **maze, int x, int y, int n)
+char *arr_to_str(char **maze, int x, int y)
 {
     char *map = malloc(sizeof(char) * (((x + 1) * y) + 1));
     int i = 0;
@@ -32,7 +32,7 @@ char *arr_to_str(char **maze, int x, int y, int n)
 
 int exp_map(char **maze, int x, int y, int n)
 {
-    char *map = arr_to_str(maze, x, y, n);
+    char *map = arr_to_str(maze, x, y);
     int i = 0;
 
     while (map[i] != '\0') {
