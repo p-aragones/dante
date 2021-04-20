@@ -37,22 +37,22 @@ int get_move(char **maze, int *c, int x, int y)
 void allocate(char **maze, int **c, int i, int m)
 {
     if (m == 0) {
-        maze[c[i][0]][c[i][1] + 1] = ' ';
+        maze[c[i][0]][c[i][1] + 1] = '*';
         c[i + 1][1] = c[i][1] + 2;
         c[i + 1][0] = c[i][0];
     }
     if (m == 1) {
-        maze[c[i][0] + 1][c[i][1]] = ' ';
+        maze[c[i][0] + 1][c[i][1]] = '*';
         c[i + 1][0] = c[i][0] + 2;
         c[i + 1][1] = c[i][1];
     }
     if (m == 2) {
-        maze[c[i][0]][c[i][1] - 1] = ' ';
+        maze[c[i][0]][c[i][1] - 1] = '*';
         c[i + 1][1] = c[i][1] - 2;
         c[i + 1][0] = c[i][0];
     }
     if (m == 3) {
-        maze[c[i][0] - 1][c[i][1]] = ' ';
+        maze[c[i][0] - 1][c[i][1]] = '*';
         c[i + 1][0] = c[i][0] - 2;
         c[i + 1][1] = c[i][1];
     }
@@ -70,11 +70,11 @@ char **create_maze(char **maze, int x, int y, int **c)
         c[i + 1] = malloc(sizeof(int) * 2);
         m = get_move(maze, c[i], x, y);
         if (m >= 0 && m <= 3) {
-            maze[c[i][0]][c[i][1]] = ' ';
+            maze[c[i][0]][c[i][1]] = '*';
             allocate(maze, c, i, m);
         }
         if (m == -1) {
-            maze[c[i][0]][c[i][1]] = ' ';
+            maze[c[i][0]][c[i][1]] = '*';
             i = i - 2;
         }
         i++;
@@ -92,7 +92,7 @@ char square(char maze, int i, int c)
     return (maze);
 }
 
-int generator(int x, int y)
+int generator(int x, int y, int n)
 {
     char **maze = malloc(sizeof(char *) * y);
     int **c = malloc(sizeof(int *) * (x * y));
@@ -111,5 +111,5 @@ int generator(int x, int y)
     maze[i - 1][p - 1] = 'e';
     maze[i - 1][p - 2] = 'e';
     maze = create_maze(maze, x, y, c);
-    return (exp_map(maze, x, y));
+    return (exp_map(maze, x, y, n));
 }

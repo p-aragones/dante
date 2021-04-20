@@ -17,8 +17,8 @@
 #include <fcntl.h>
 
 int check_args(int argc, char **argv);
-int generator(int x, int y);
-int exp_map(char **maze, int x, int y);
-char *arr_to_str(char **maze, int x, int y);
+int generator(int x, int y, int n);
+int exp_map(char **maze, int x, int y, int n);
+char *arr_to_str(char **maze, int x, int y, int n);
 
 #endif
