@@ -14,6 +14,8 @@ char *arr_to_str(char **maze, int x, int y)
     int e = 0;
     int c = 0;
 
+    if (x >= 2 && y >= 5)
+        maze[4][1] = 'X';
     while (i < y) {
         c = 0;
         while (c < x) {
@@ -37,7 +39,7 @@ int exp_map(char **maze, int x, int y)
 
     while (map[i] != '\0') {
         if (map[i] == 'e')
-            map[i] = '*';
+            map[i] = ' ';
         i++;
     }
     printf("%s", map);
