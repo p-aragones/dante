@@ -14,8 +14,6 @@ char *arr_to_str(char **maze, int x, int y, int n)
     int e = 0;
     int c = 0;
 
-    if (x >= 2 && y >= 5 && n == 1)
-        maze[4][1] = 'X';
     while (i < y) {
         c = 0;
         while (c < x) {

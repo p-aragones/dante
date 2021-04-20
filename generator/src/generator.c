@@ -6,22 +6,23 @@
 */
 
 #include "generator.h"
+#include <time.h>
 
 int get_move(char **maze, int *c, int x, int y)
 {
     int r = rand() % 4;
     int i = 0;
 
-    while (i++ < 4) {
-        if (r == 0 || r == 4) {
+    while (i < 4) {
+        if (r == 0) {
             if (c[1] < x - 2 && maze[c[0]][c[1] + 2] == 'e')
                 return (r);
         }
-        if (r == 1 || r == 5) {
+        if (r == 1) {
             if (c[0] < y - 2 && maze[c[0] + 2][c[1]] == 'e')
                 return (r);
         }
-        if (r == 2 || r == 6) {
+        if (r == 2) {
             if (c[1] > 1 && maze[c[0]][c[1] - 2] == 'e')
                 return (r);
         }
@@ -30,6 +31,9 @@ int get_move(char **maze, int *c, int x, int y)
                 return (r);
         }
         r++;
+        if (r == 4)
+            r = 0;
+        i++;
     }
     return (-1);
 }
@@ -99,6 +103,7 @@ int generator(int x, int y, int n)
     int i = 0;
     int p = 0;
 
+    srand(time(NULL));
     while (i < y) {
         maze[i] = malloc(sizeof(char) * x);
         p = 0;
