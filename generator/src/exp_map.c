@@ -7,6 +7,30 @@
 
 #include "generator.h"
 
+void allocate(char **maze, int **c, int i, int m)
+{
+    if (m == 0) {
+        maze[c[i][0]][c[i][1] + 1] = '*';
+        c[i + 1][1] = c[i][1] + 2;
+        c[i + 1][0] = c[i][0];
+    }
+    if (m == 1) {
+        maze[c[i][0] + 1][c[i][1]] = '*';
+        c[i + 1][0] = c[i][0] + 2;
+        c[i + 1][1] = c[i][1];
+    }
+    if (m == 2) {
+        maze[c[i][0]][c[i][1] - 1] = '*';
+        c[i + 1][1] = c[i][1] - 2;
+        c[i + 1][0] = c[i][0];
+    }
+    if (m == 3) {
+        maze[c[i][0] - 1][c[i][1]] = '*';
+        c[i + 1][0] = c[i][0] - 2;
+        c[i + 1][1] = c[i][1];
+    }
+}
+
 char *arr_to_str(char **maze, int x, int y)
 {
     char *map = malloc(sizeof(char) * (((x + 1) * y) + 1));
