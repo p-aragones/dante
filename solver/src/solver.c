@@ -24,8 +24,8 @@ int solver(char *path)
         return (84);
     end = find_end(map);
     grid = cell_map(map, end);
-    if (grid == NULL)
-        return (84);
     map = a_star(map, grid, end);
+    if (map == NULL)
+        return (84);
     return (0);
 }

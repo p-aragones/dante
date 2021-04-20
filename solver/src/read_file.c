@@ -26,10 +26,8 @@ char *read_file(char *file)
     int fd = open(file, O_RDONLY);
     char *buff = malloc(sizeof(char) * (size + 1));
 
-    if (buff == NULL || fd == -1 || size == 0) {
-        my_putstr("invalid file\n");
+    if (buff == NULL || fd == -1 || size == 0)
         return (NULL);
-    }
     if (read (fd, buff, size) == -1)
         return (NULL);
     buff[size] = '\0';

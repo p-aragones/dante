@@ -65,5 +65,5 @@ char **a_star(char **map, cell_t ***grid, point_t *end)
         open_list = delete_current_node(open_list, node);
         i++;
     }
-    return (map);
+    return (NULL);
 }
