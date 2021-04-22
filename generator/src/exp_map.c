@@ -31,13 +31,32 @@ void allocate(char **maze, int **c, int i, int m)
     }
 }
 
-char *arr_to_str(char **maze, int x, int y)
+char **imperfect(char **maze, int x, int y, int n)
+{
+    int i = 0;
+    int c = 0;
+
+    if (n == 1)
+        return (maze);
+    while (i < (y - 1)) {
+        maze[i][0] = '*';
+        i++;
+    }
+    while (c < x) {
+        maze[i][c] = '*';
+        c++;
+    }
+    return (maze);
+}
+
+char *arr_to_str(char **maze, int x, int y, int n)
 {
     char *map = malloc(sizeof(char) * (((x + 1) * y) + 1));
     int i = 0;
     int e = 0;
     int c = 0;
 
+    maze = imperfect(maze, x, y, n);
     while (i < y) {
         c = 0;
         while (c < x) {
@@ -56,7 +75,7 @@ char *arr_to_str(char **maze, int x, int y)
 
 int exp_map(char **maze, int x, int y, int n)
 {
-    char *map = arr_to_str(maze, x, y);
+    char *map = arr_to_str(maze, x, y, n);
     int i = 0;
 
     while (map[i] != '\0') {
